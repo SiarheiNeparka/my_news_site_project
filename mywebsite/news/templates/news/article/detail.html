@@ -1,0 +1,11 @@
+{% extends "news/base.html" %}
+
+{% block title %} {{ article.headline }} {% endblock %}
+
+{% block content %}
+<h1>{{ article.headline }}</h1>
+<p>
+    Published {{ article.publish }} by {{ article.reporter }}
+</p>
+{{ article.content }}
+{% endblock %}

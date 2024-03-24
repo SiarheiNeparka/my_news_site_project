@@ -11,14 +11,28 @@
 </head>
 
 <body>
-    <div>
-        {% block content %}
-        {% endblock%}
-    </div>
-    <div>
-        <h2>My News</h2>
-        <p>This is my news site.</p>
-    </div>
+    <header>
+        <h2>Новости</h2>
+    </header>
+    <section>
+        <article>
+            {% block content %}
+            {% endblock%}
+        </article>
+
+        <nav>
+            <ul>
+                <h2>Панель навигации</h2>
+                <li>
+                    <p>Новостной портал</p>
+                </li>
+                <a href="{% url 'news:article_list' %}">Список новостей</a>
+            </ul>
+        </nav>
+    </section>
+    <footer>
+        <h2>© 2024 Новости</h2>
+    </footer>
 </body>
 
 </html>

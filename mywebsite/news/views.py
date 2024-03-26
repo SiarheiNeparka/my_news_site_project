@@ -9,11 +9,14 @@ def article_list(request):
     return render(request, 'news/article/list.html', {'articles': articles})
 
 
-def article_detail(request, id):
+def article_detail(request, year, month, day, article_slg):
     article = get_object_or_404(
         Article,
-        id=id,
         status=Article.Status.PUBLISHED,
+        slug=article_slg,
+        publish__year=year,
+        publish__month=month,
+        publish__day=day,
     )
 
     return render(request, 'news/article/detail.html', {'article': article})

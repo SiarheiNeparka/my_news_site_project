@@ -4,15 +4,36 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+class PublishedManager(models.Manager):
+    def get_queryset(self) -> models.QuerySet:
+        return super().get_queryset().filter(status=Article.Status.PUBLISHED)
+
+
 class Article(models.Model):
-    publish = models.DateField(default=timezone.now)
+    publish = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     headline = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=250)
     content = models.TextField()
     reporter = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="news_articles",
     )
+
+    class Status(models.TextChoices):
+        DRAFT = "DF", "Draft"
+        PUBLISHED = "PB", "Published"
+
+    status = models.CharField(
+        max_length=2,
+        choices=Status.choices,
+        default=Status.DRAFT,
+    )
+
+    objects = models.Manager()
+    published = PublishedManager()
 
     class Meta:
         ordering = ["-publish"]

@@ -17,6 +17,16 @@ class Article(models.Model):
         related_name="news_articles",
     )
 
+    class Status(models.TextChoices):
+        DRAFT = "DF", "Draft"
+        PUBLISHED = "PB", "Published"
+
+    status = models.CharField(
+        max_length=2,
+        choices=Status.choices,
+        default=Status.DRAFT,
+    )
+
     class Meta:
         ordering = ["-publish"]
         indexes = [

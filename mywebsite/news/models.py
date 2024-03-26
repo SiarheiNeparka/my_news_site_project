@@ -9,6 +9,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     headline = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=250)
     content = models.TextField()
     reporter = models.ForeignKey(
         User,

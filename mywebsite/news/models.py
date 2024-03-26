@@ -32,6 +32,9 @@ class Article(models.Model):
         default=Status.DRAFT,
     )
 
+    objects = models.Manager()
+    published = PublishedManager()
+
     class Meta:
         ordering = ["-publish"]
         indexes = [

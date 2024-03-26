@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-size: medium;
+}
+
+/* Style the header */
+header {
+    /* background: #181818; */
+    background: #000000;
+    padding: 30px;
+    text-align: center;
+    font-size: 45px;
+    color: #49c5b6;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+section {
+    display: flex;
+}
+
+/* Style the articles */
+article {
+    flex: 2;
+    background: #000000;
+    padding: 30px;
+}
+
+/* Style the navigation menu #2779a7; */
+nav {
+    flex: 1;
+    background: #2779a7;
+    padding: 30px;
+    font-size: large;
+}
+
+nav ul {
+    color: #ffffff;
+    padding: 30px;
+}
+
+.pdate {
+    font-style: italic;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+a:link,
+a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid #49c5b6;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+a:hover,
+a:active {
+    background-color: #49c5b6;
+    color: white;
+}
+
+/* Style the footer */
+footer {
+    background-color: #000000;
+    padding: 45px;
+    text-align: center;
+    color: #49c5b6;
+    font-size: 40px;
+}

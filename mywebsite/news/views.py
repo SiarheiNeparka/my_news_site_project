@@ -1,10 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Article
+from django.core.paginator import Paginator
 
 
 # Create your views here.
 def article_list(request):
     articles = Article.published.all()
+
+    paginator = Paginator(articles, 2)
+    page_number = request.GET.get('page', 1)
+    articles = paginator.page(page_number)
 
     return render(request, 'news/article/list.html', {'articles': articles})
 

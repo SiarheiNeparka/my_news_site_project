@@ -5,7 +5,8 @@ body {
 }
 
 /* Style the header */
-header {
+header,
+main {
     /* background: #181818; */
     background: #000000;
     padding: 30px;

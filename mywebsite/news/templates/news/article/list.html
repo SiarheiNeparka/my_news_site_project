@@ -6,12 +6,12 @@
 <h1>Новости</h1>
 {% for article in articles %}
 <h2>
-    <a href="{% url 'news:article_detail' article.id %}">
+    <a href="{{ article.get_absolute_url }}">
         {{ article.headline }}
     </a>
 </h2>
 <p class="pdate">
-    Опубликовано {{ article.publish }} {{ article.reporter}}
+    Опубликовано {{ article.publish }} автором {{ article.reporter}}
 </p>
 {{ article.content|truncatewords:30|linebreaks }}
 {% endfor%}

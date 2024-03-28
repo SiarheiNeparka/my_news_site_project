@@ -78,3 +78,22 @@ footer {
     color: #49c5b6;
     font-size: 40px;
 }
+
+.pagination {
+    text-align: center;
+}
+
+.step-links a:link,
+.step-links a:visited {
+    background-color: #000000;
+    color: #49c5b6;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.step-links a:hover,
+.step-links a:active {
+    background-color: #49c5b6;
+    color: white;
+}

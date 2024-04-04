@@ -2,11 +2,14 @@ from django.shortcuts import render, get_object_or_404
 from .models import Article
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.list import ListView
+from .forms import EmailPostForm
+from django.core.mail import send_mail
+from mywebsite.settings import EMAIL_HOST_USER
 
 
 # Create your views here.
 class ArticleListView(ListView):
-    '''Alternative article list view.'''
+    """Alternative article list view."""
 
     queryset = Article.published.all()
     context_object_name = 'articles'
@@ -25,3 +28,49 @@ def article_detail(request, year, month, day, article_slg):
     )
 
     return render(request, 'news/article/detail.html', {'article': article})
+
+
+def article_share(request, article_id):
+    article = get_object_or_404(
+        Article,
+        id=article_id,
+        status=Article.Status.PUBLISHED,
+    )
+    sent = False
+
+    if request.method == 'POST':
+        form = EmailPostForm(request.POST)
+
+        if form.is_valid():
+            cd = form.cleaned_data
+
+            article_url = request.build_absolute_uri(
+                article.get_absolute_url(),
+            )
+
+            subject = f'{cd['name']} прислал Вам новость: {article.headline}'
+
+            message = (
+                f'Новость ({article.headline}) доступна по ссылке {
+                    article_url
+                }'
+            )
+
+            if cd['comments']:
+                message = (
+                    message
+                    + f'\n\n{cd['name']} оставил комментарий:\n{
+                        cd['comments']
+                    }'
+                )
+
+            send_mail(subject, message, EMAIL_HOST_USER, [cd['to']])
+            sent = True
+    else:
+        form = EmailPostForm()
+
+    return render(
+        request,
+        'news/article/share.html',
+        {'article': article, 'form': form, 'sent': sent},
+    )

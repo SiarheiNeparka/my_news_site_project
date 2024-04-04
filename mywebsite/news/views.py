@@ -2,14 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from .models import Article
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.list import ListView
-from .forms import EmailPostForm
-from django.core.mail import send_mail
-from mywebsite.settings import EMAIL_HOST_USER
 
 
 # Create your views here.
 class ArticleListView(ListView):
-    """Alternative article list view."""
+    '''Alternative article list view.'''
 
     queryset = Article.published.all()
     context_object_name = 'articles'

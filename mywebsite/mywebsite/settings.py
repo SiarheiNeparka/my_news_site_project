@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import configparser
+import socket
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +28,9 @@ SECRET_KEY = 'django-insecure-a)zos&*%36fr-a@&e9(q1)(1sg)#t#dc))&a=agcis22^v-c(g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+]
 
 
 # Application definition
@@ -122,3 +127,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Email server configuration
+conf = configparser.ConfigParser()
+conf.read(f'{BASE_DIR}/configs.cfg')
+
+socket.getaddrinfo(conf['gmail']['EMAIL_HOST'], conf['gmail']['EMAIL_PORT'])
+
+EMAIL_HOST = conf['gmail']['EMAIL_HOST']
+EMAIL_HOST_USER = conf['gmail']['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = conf['gmail']['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = conf['gmail']['EMAIL_PORT']
+EMAIL_USE_TLS = conf['gmail']['EMAIL_USE_TLS']

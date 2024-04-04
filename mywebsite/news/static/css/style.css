@@ -5,7 +5,8 @@ body {
 }
 
 /* Style the header */
-header {
+header,
+main {
     /* background: #181818; */
     background: #000000;
     padding: 30px;
@@ -77,4 +78,53 @@ footer {
     text-align: center;
     color: #49c5b6;
     font-size: 40px;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.step-links a:link,
+.step-links a:visited {
+    background-color: #000000;
+    color: #49c5b6;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.step-links a:hover,
+.step-links a:active {
+    background-color: #49c5b6;
+    color: white;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #49c5b6;
+    border-radius: 4px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #49c5b6;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+input[type=submit] {
+    background-color: #49c5b6;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
 }

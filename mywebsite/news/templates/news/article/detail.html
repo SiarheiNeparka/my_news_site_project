@@ -8,4 +8,8 @@
     Опубликовано {{ article.publish }} автором {{ article.reporter }}
 </p>
 {{ article.content }}
+
+<br><br>
+<a href="{% url 'news:article_share' article.id %}">Поделиться новостью.</a>
+
 {% endblock %}

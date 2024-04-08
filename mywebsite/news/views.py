@@ -75,3 +75,27 @@ def article_share(request, article_id):
         'news/article/share.html',
         {'article': article, 'form': form, 'sent': sent},
     )
+
+
+@require_POST
+def article_comment(request, article_id):
+    article = get_object_or_404(
+        Article,
+        id=article_id,
+        status=Article.Status.PUBLISHED,
+    )
+
+    comment = None
+
+    form = CommentForm(data=request.POST)
+
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.article = article
+        comment.save()
+    
+    return render(
+        request,
+        'news/article/comment.html',
+        {'article': article, 'form': form, 'comment': comment},
+    )

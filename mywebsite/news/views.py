@@ -28,7 +28,15 @@ def article_detail(request, year, month, day, article_slg):
         publish__day=day,
     )
 
-    return render(request, 'news/article/detail.html', {'article': article})
+    comments = article.comments.filter(active=True)
+
+    form = CommentForm()
+
+    return render(
+        request,
+        'news/article/detail.html',
+        {'article': article, 'comments': comments, 'form': form},
+    )
 
 
 def article_share(request, article_id):

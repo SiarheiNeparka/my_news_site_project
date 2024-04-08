@@ -12,4 +12,9 @@ urlpatterns = [
         name='article_detail',
     ),
     path('<int:article_id>/share/', views.article_share, name='article_share'),
+    path(
+        '<int:article_id>/comment/',
+        views.article_comment,
+        name='article_comment',
+    ),
 ]

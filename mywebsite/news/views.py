@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Article
+from .models import Article, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.list import ListView
-from .forms import EmailPostForm
+from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from mywebsite.settings import EMAIL_HOST_USER
+from django.views.decorators.http import require_POST
 
 
 # Create your views here.
@@ -51,7 +52,7 @@ def article_share(request, article_id):
             subject = f'{cd['name']} прислал Вам новость: {article.headline}'
 
             message = (
-                f'Новость ({article.headline}) доступна по ссылке {
+                f'Новость({article.headline}) доступна по ссылке {
                     article_url
                 }'
             )
@@ -59,7 +60,7 @@ def article_share(request, article_id):
             if cd['comments']:
                 message = (
                     message
-                    + f'\n\n{cd['name']} оставил комментарий:\n{
+                    + f'\n\n{cd['name']} оставил комментарий: \n{
                         cd['comments']
                     }'
                 )

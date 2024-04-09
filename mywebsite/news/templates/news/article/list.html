@@ -4,6 +4,11 @@
 
 {% block content %}
 <h1>Новости</h1>
+
+{% if tag %}
+<h2>Новости с тегом "{% tag.name %}"</h2>
+{% endif %}
+
 {% for article in articles %}
 <h2>
     <a href="{{ article.get_absolute_url }}">
@@ -11,11 +16,14 @@
     </a>
 </h2>
 
-<p class="pdate">
-    Tags: {{ article.tags.all|join:", " }}
-</p>
+{% for tag in article.tags.all %}
+<a href="{% url 'news:article_list_by_tag' tag.slug %}">{{ tag.name }}</a>
+{if not forloop.last}, {% endif %}
+{% endfor %}
 
 <p class="pdate">
+    Tags: {{ article.tags.all|join:", " }}
+    <br>
     Опубликовано {{ article.publish }} автором {{ article.reporter}}
 </p>
 {{ article.content|truncatewords:30|linebreaks }}

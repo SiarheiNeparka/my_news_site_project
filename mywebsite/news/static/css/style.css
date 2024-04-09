@@ -85,7 +85,9 @@ footer {
 }
 
 .step-links a:link,
-.step-links a:visited {
+.step-links a:visited,
+.tags-links a:link,
+.tags-links a:visited {
     background-color: #000000;
     color: #49c5b6;
     border: none;
@@ -94,7 +96,9 @@ footer {
 }
 
 .step-links a:hover,
-.step-links a:active {
+.step-links a:active,
+.tags-links a:hover,
+.tags-links a:active {
     background-color: #49c5b6;
     color: white;
 }

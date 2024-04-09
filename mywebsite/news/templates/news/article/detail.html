@@ -12,4 +12,23 @@
 <br><br>
 <a href="{% url 'news:article_share' article.id %}">Поделиться новостью.</a>
 
+{% with comments.count as total_comments %}
+<h2>
+    {{ total_comments }} comment{{ total_comments|pluralize }}
+</h2>
+{% endwith %}
+
+{% for comment in comments %}
+<div class="comment">
+    <p>
+        {{ forloop.counter }} комментарий, оставленный {{ comment.name }} {{ comment.created }}
+    </p>
+    {{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p>Ни одного комментария не было оставлено.</p>
+{% endfor %}
+
+{% include "news/article/includes/comment_form.html" %}
+
 {% endblock %}

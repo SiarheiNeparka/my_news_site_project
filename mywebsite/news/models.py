@@ -56,6 +56,28 @@ class Article(models.Model):
             ],
         )
 
+    def get_absolute_url_share(self):
+        return reverse(
+            'news:article_share',
+            args=[
+                self.publish.year,
+                self.publish.month,
+                self.publish.day,
+                self.slug,
+            ],
+        )
+
+    def get_absolute_url_comment(self):
+        return reverse(
+            'news:article_comment',
+            args=[
+                self.publish.year,
+                self.publish.month,
+                self.publish.day,
+                self.slug,
+            ],
+        )
+
     def __str__(self):
         return self.headline
 

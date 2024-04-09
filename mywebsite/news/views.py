@@ -57,11 +57,14 @@ def article_detail(request, year, month, day, article_slg):
     )
 
 
-def article_share(request, article_id):
+def article_share(request, year, month, day, article_slg):
     article = get_object_or_404(
         Article,
-        id=article_id,
         status=Article.Status.PUBLISHED,
+        slug=article_slg,
+        publish__year=year,
+        publish__month=month,
+        publish__day=day,
     )
     sent = False
 
@@ -104,11 +107,14 @@ def article_share(request, article_id):
 
 
 @require_POST
-def article_comment(request, article_id):
+def article_comment(request, year, month, day, article_slg):
     article = get_object_or_404(
         Article,
-        id=article_id,
         status=Article.Status.PUBLISHED,
+        slug=article_slg,
+        publish__year=year,
+        publish__month=month,
+        publish__day=day,
     )
 
     comment = None

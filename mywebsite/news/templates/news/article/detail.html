@@ -10,7 +10,7 @@
 {{ article.content }}
 
 <br><br>
-<a href="{% url 'news:article_share' article.id %}">Поделиться новостью.</a>
+<a href="{{ article.get_absolute_url_share }}">Поделиться новостью.</a>
 
 {% with comments.count as total_comments %}
 <h2>

@@ -9,29 +9,14 @@ from taggit.models import Tag
 
 
 # Create your views here.
-def article_list(request):
+def article_list(request, tag_slug=None):
     article_list = Article.published.all()
 
-    paginator = Paginator(article_list, 2)
+    tag = None
 
-    page_number = request.GET.get('page', 1)
-
-    try:
-        articles = paginator.page(page_number)
-    except PageNotAnInteger:
-        articles = paginator.page(1)
-    except EmptyPage:
-        articles = paginator.page(paginator.num_pages)
-
-    return render(request, 'news/article/list.html', {'articles': articles})
-
-
-def article_list_by_tag(request, tag_slug=None):
-    article_list = Article.published.all()
-
-    tag = get_object_or_404(Tag, slug=tag_slug)
-
-    article_list = article_list.filter(tags__in=[tag])
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        article_list = article_list.filter(tags__in=[tag])
 
     paginator = Paginator(article_list, 2)
 

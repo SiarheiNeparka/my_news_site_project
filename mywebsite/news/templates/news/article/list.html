@@ -18,7 +18,7 @@
 
 {% for tag in article.tags.all %}
 <a href="{% url 'news:article_list_by_tag' tag.slug %}">{{ tag.name }}</a>
-{if not forloop.last}, {% endif %}
+{% if not forloop.last %}, {% endif %}
 {% endfor %}
 
 <p class="pdate">

@@ -20,12 +20,10 @@
 <span class="tags-links">
     <a href="{% url 'news:article_list_by_tag' tag.slug %}">{{ tag.name }}</a>
 </span>
-{% if not forloop.last %}, {% endif %}
+{% if not forloop.last %}/{% endif %}
 {% endfor %}
 
 <p class="pdate">
-    Tags: {{ article.tags.all|join:", " }}
-    <br>
     Опубликовано {{ article.publish }} автором {{ article.reporter}}
 </p>
 {{ article.content|truncatewords:30|linebreaks }}

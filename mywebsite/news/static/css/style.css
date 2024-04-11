@@ -132,3 +132,23 @@ input[type=submit] {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.latest-articles-ul {
+    list-style-type: disc;
+    padding: 0px;
+}
+
+.latest-articles-links a:link,
+.latest-articles-links a:visited {
+    background-color: #2779a7;
+    color: #49c5b6;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.latest-articles-links a:hover,
+.latest-articles-links a:active {
+    background-color: #49c5b6;
+    color: white;
+}

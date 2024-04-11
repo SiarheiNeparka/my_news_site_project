@@ -1,4 +1,5 @@
 {% extends "news/base.html" %}
+{% load news_tags %}
 
 {% block title %} {{ article.headline }} {% endblock %}
 
@@ -7,7 +8,7 @@
 <p class="pdate">
     Опубликовано {{ article.publish }} автором {{ article.reporter }}
 </p>
-{{ article.content }}
+{{ article.content|markdown }}
 
 <br><br>
 <a href="{{ article.get_absolute_url_share }}">Поделиться новостью.</a>

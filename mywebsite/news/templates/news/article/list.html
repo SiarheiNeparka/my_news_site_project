@@ -1,4 +1,5 @@
 {% extends "news/base.html" %}
+{% load news_tags %}
 
 {% block title %}Новости{% endblock%}
 
@@ -26,7 +27,7 @@
 <p class="pdate">
     Опубликовано {{ article.publish }} автором {{ article.reporter}}
 </p>
-{{ article.content|truncatewords:30|linebreaks }}
+{{ article.content|markdown|truncatewords:30 }}
 {% endfor%}
 {% include "pagination.html" with page=articles %}
 {% endblock%}

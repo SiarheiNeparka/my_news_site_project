@@ -156,3 +156,19 @@ input[type=submit] {
     background-color: #49c5b6;
     color: white;
 }
+
+.rss-link a {
+    background-color: #000000;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.rss-link a img {
+    width: 30px;
+    height: 30px;
+}
+
+.rss-link a:hover img {
+    transform: scale(1.1);
+}

@@ -1,9 +1,4 @@
-from django.contrib.sitemaps import (
-    _SupportsCount,
-    _SupportsLen,
-    _SupportsOrdered,
-    Sitemap,
-)
+from django.contrib.sitemaps import Sitemap
 from .models import Article
 
 
@@ -11,7 +6,7 @@ class ArticleSitemap(Sitemap):
     changefreq = 'weekly'
     priority = 0.9
 
-    def items(self) -> _SupportsLen | _SupportsCount | _SupportsOrdered:
+    def items(self):
         return Article.publish.all()
 
     def lastmod(self, obj):

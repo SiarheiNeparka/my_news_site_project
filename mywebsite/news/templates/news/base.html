@@ -24,11 +24,23 @@
         <nav>
             <ul>
                 <h2>Панель навигации</h2>
+                <hr>
                 <li>
                     <p>Новостной портал содержит новостей: {% total_articles %}.</p>
                 </li>
+                <hr>
                 <h3>Самые свежие новости:</h3>
                 {% show_latest_articles 2 %}
+                <hr>
+                {% get_most_commented_articles 2 as most_commented_articles %}
+                <h3>Самые обсуждаемые новости:</h3>
+                {% for article in most_commented_articles %}
+                <li>
+                    <p class="most-commented-articles-links"><a href="{{ article.get_absolute_url }}">
+                            {{ article.headline }}</a></p>
+                </li>
+                {% endfor %}
+                <hr>
                 <a href="{% url 'news:article_list' %}">Список всех новостей</a>
             </ul>
         </nav>

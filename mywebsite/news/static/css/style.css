@@ -139,7 +139,9 @@ input[type=submit] {
 }
 
 .latest-articles-links a:link,
-.latest-articles-links a:visited {
+.latest-articles-links a:visited,
+.most-commented-articles-links a:link,
+.most-commented-articles-links a:visited {
     background-color: #2779a7;
     color: #49c5b6;
     border: none;
@@ -148,7 +150,9 @@ input[type=submit] {
 }
 
 .latest-articles-links a:hover,
-.latest-articles-links a:active {
+.latest-articles-links a:active,
+.most-commented-articles-links a:hover,
+.most-commented-articles-links a:active {
     background-color: #49c5b6;
     color: white;
 }

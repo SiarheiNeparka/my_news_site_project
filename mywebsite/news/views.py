@@ -51,10 +51,24 @@ def article_detail(request, year, month, day, article_slg):
 
     form = CommentForm()
 
+    article_tags_ids = article.tags.value_list('id', flat=True)
+
+    similar_articles = Article.published.filter(
+        tags__in=article_tags_ids,
+    ).exclude(id=article.id)
+    similar_articles = similar_articles.annotate(
+        same_tags=Count('tags'),
+    ).order_by('-same_tags', '-publish')[:2]
+
     return render(
         request,
         'news/article/detail.html',
-        {'article': article, 'comments': comments, 'form': form},
+        {
+            'article': article,
+            'comments': comments,
+            'form': form,
+            'similar_articles': similar_articles,
+        },
     )
 
 

@@ -51,7 +51,7 @@ def article_detail(request, year, month, day, article_slg):
 
     form = CommentForm()
 
-    article_tags_ids = article.tags.value_list('id', flat=True)
+    article_tags_ids = article.tags.values_list('id', flat=True)
 
     similar_articles = Article.published.filter(
         tags__in=article_tags_ids,

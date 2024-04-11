@@ -31,4 +31,13 @@
 
 {% include "news/article/includes/comment_form.html" %}
 
+<h2>Похожие новости</h2>
+{% for article in similar_articles %}
+<p>
+    <a href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+</p>
+{% empty %}
+Новости на похожую тематику отсутствуют.
+{% endfor %}
+
 {% endblock %}

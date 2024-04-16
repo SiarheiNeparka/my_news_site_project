@@ -7,10 +7,15 @@ from mywebsite.settings import EMAIL_HOST_USER
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from django.db.models import Count
-from django.contrib.postgres.search import SearchVector
-
+from django.contrib.postgres.search import (
+    SearchVector,
+    SearchQuery,
+    SearchRank,
+)
 
 # Create your views here.
+
+
 def article_list(request, tag_slug=None):
     article_list = Article.published.all()
 

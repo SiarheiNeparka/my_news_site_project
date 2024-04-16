@@ -28,4 +28,5 @@ urlpatterns = [
         name='article_comment',
     ),
     path('feed/', LatestArticlesFeed(), name='article_feed'),
+    path('search/', views.article_search, name='article_search'),
 ]

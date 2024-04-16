@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Article
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import EmailPostForm, CommentForm
+from .forms import EmailPostForm, CommentForm, SearchForm
 from django.core.mail import send_mail
 from mywebsite.settings import EMAIL_HOST_USER
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from django.db.models import Count
+from django.contrib.postgres.search import SearchVector
 
 
 # Create your views here.
@@ -145,4 +146,25 @@ def article_comment(request, year, month, day, article_slg):
         request,
         'news/article/comment.html',
         {'article': article, 'form': form, 'comment': comment},
+    )
+
+
+def article_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Article.published.annotate(
+                search=SearchVector('headline', 'content'),
+            ).filter(search=query)
+
+    return render(
+        request,
+        'news/article/search.html',
+        {'form': form, 'query': query, 'results': results},
     )

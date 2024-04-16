@@ -25,9 +25,11 @@
             <ul>
                 <h2>Панель навигации</h2>
                 <hr>
+                <a href="{% url 'news:article_search' %}">Поиск по новостям</a>
                 <li>
                     <p>Новостной портал содержит новостей: {% total_articles %}.</p>
                 </li>
+                <a href="{% url 'news:article_list' %}">Список всех новостей</a>
                 <hr>
                 <h3>Самые свежие новости:</h3>
                 {% show_latest_articles 2 %}
@@ -41,7 +43,7 @@
                 </li>
                 {% endfor %}
                 <hr>
-                <a href="{% url 'news:article_list' %}">Список всех новостей</a>
+                <a href="{% url 'django.sontrib.sitemaps.views.sitemap' %}">XML-карта сайта</a>
             </ul>
         </nav>
     </section>

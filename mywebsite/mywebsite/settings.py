@@ -79,14 +79,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mywebsite.wsgi.application'
 
+conf = configparser.ConfigParser()
+conf.read(f'{BASE_DIR}/configs.cfg')
+
+PSQL_NAME = conf['postgre']['NAME']
+PSQL_USER = conf['postgre']['USER']
+PSQL_PASSWORD = conf['postgre']['PASSWORD']
+PSQL_HOST = conf['postgre']['HOST']
+PSQL_PORT = conf['postgre']['PORT']
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': PSQL_NAME,
+        'USER': PSQL_USER,
+        'PASSWORD': PSQL_PASSWORD,
+        'HOST': PSQL_HOST,
+        'PORT': PSQL_PORT,
     }
 }
 
@@ -134,9 +147,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Email server configuration
-conf = configparser.ConfigParser()
-conf.read(f'{BASE_DIR}/configs.cfg')
-
 EMAIL_HOST = conf['gmail']['EMAIL_HOST']
 EMAIL_HOST_USER = conf['gmail']['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = conf['gmail']['EMAIL_HOST_PASSWORD']

@@ -169,7 +169,7 @@ def article_search(request):
 
             results = Article.published.annotate(
                 similarity=TrigramSimilarity('headline', query),
-            ).filter(similatity__gt=0.1).order_by('-similarity')
+            ).filter(similarity__gt=0.1).order_by('-similarity')
 
     return render(
         request,

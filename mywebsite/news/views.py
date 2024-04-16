@@ -165,8 +165,12 @@ def article_search(request):
         if form.is_valid():
             query = form.cleaned_data['query']
 
-            search_vector = SearchVector('headline', 'content')
-            search_query = SearchQuery(query)
+            search_vector = SearchVector(
+                'headline',
+                'content',
+                config='russian',
+            )
+            search_query = SearchQuery(query, config='russian')
 
             results = Article.published.annotate(
                 search=search_vector,

@@ -10,5 +10,6 @@ venv
 db.sqlite3
 mywebsite_data.json
 
+
 # configs
 configs.cfg

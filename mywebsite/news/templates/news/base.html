@@ -41,6 +41,8 @@
                     <p>Новостной портал содержит новостей: {% total_articles %}.</p>
                 </li>
                 <a href="{% url 'news:article_list' %}">Список всех новостей</a>
+                <br>
+                <a href="{% url 'news:article_ranks' %}">Самые популярные новости</a>
                 <hr>
                 <h3>Самые свежие новости:</h3>
                 {% show_latest_articles 2 %}

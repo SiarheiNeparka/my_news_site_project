@@ -9,6 +9,15 @@ from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.postgres.search import TrigramSimilarity
 from django.contrib import messages
+import redis
+from django.conf import settings
+
+
+r = redis.Redis(
+    host=settings.REDIS_HOST,
+    port=settings.REDIS_PORT,
+    db=settings.REDIS_DB,
+)
 
 
 # Create your views here.

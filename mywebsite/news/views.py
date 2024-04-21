@@ -82,6 +82,8 @@ def article_detail(request, year, month, day, article_slg):
 
     total_views = r.incr(f'article:{article.id}:views')
 
+    r.zincrby('article_ranks', 1, article.id)
+
     return render(
         request,
         'news/article/detail.html',

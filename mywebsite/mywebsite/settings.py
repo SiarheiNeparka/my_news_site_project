@@ -80,9 +80,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mywebsite.wsgi.application'
 
+
+# Connection with configs.cfg file.
 conf = configparser.ConfigParser()
 conf.read(f'{BASE_DIR}/configs.cfg')
 
+# Configuration information for email server.
+EMAIL_HOST = conf['gmail']['EMAIL_HOST']
+EMAIL_HOST_USER = conf['gmail']['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = conf['gmail']['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = conf['gmail']['EMAIL_PORT']
+EMAIL_USE_TLS = conf['gmail']['EMAIL_USE_TLS']
+
+# Configuration information for postgresql database.
 PSQL_NAME = conf['postgre']['NAME']
 PSQL_USER = conf['postgre']['USER']
 PSQL_PASSWORD = conf['postgre']['PASSWORD']
@@ -145,11 +155,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# Email server configuration
-EMAIL_HOST = conf['gmail']['EMAIL_HOST']
-EMAIL_HOST_USER = conf['gmail']['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = conf['gmail']['EMAIL_HOST_PASSWORD']
-EMAIL_PORT = conf['gmail']['EMAIL_PORT']
-EMAIL_USE_TLS = conf['gmail']['EMAIL_USE_TLS']

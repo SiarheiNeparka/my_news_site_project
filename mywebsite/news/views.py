@@ -205,3 +205,18 @@ def article_search(request):
         'news/article/search.html',
         {'form': form, 'query': query, 'results': results},
     )
+
+
+def article_ranks(request):
+    article_ranks = r.zrange('article_ranks', 0, -1, desv=True)[:5]
+
+    article_ranks_ids = [int(id) for id in article_ranks]
+
+    most_read_news = list(Article.published.filter(id__in=article_ranks_ids))
+    most_read_news.sort(key=lambda x: article_ranks_ids.index(x.id))
+
+    return render(
+        request,
+        'news/article/ranks.html',
+        {'most_read_news': most_read_news},
+    )

@@ -104,7 +104,7 @@ def article_share(request, year, month, day, article_slg):
             subject = f'{cd['name']} прислал Вам новость: {article.headline}'
 
             message = (
-                f'Новость({article.headline}) доступна по ссылке {
+                f'Новость "{article.headline}" доступна по ссылке {
                     article_url
                 }'
             )

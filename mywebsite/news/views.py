@@ -34,7 +34,10 @@ def article_list(request, tag_slug=None):
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
     else:
-        messages.success(request, 'Страница успешно загружена.')
+        messages.success(
+            request,
+            'Все опубликованные новости успешно загружены.',
+        )
 
     return render(
         request,
@@ -66,7 +69,7 @@ def article_detail(request, year, month, day, article_slg):
         same_tags=Count('tags'),
     ).order_by('-same_tags', '-publish')[:2]
 
-    messages.success(request, 'Страница успешно загружена.')
+    messages.success(request, 'Полный текст новости успешно загружен.')
 
     return render(
         request,
@@ -119,6 +122,11 @@ def article_share(request, year, month, day, article_slg):
 
             send_mail(subject, message, EMAIL_HOST_USER, [cd['to']])
             sent = True
+
+            messages.success(
+                request,
+                'Получателю отправлена ссылка на статью.',
+            )
     else:
         form = EmailPostForm()
 
@@ -149,7 +157,7 @@ def article_comment(request, year, month, day, article_slg):
         comment.article = article
         comment.save()
 
-        messages.success(request, 'Ваш комментарий успешно добавлен.')
+        messages.success(request, 'Комментарий будет отображён внизу списка.')
     
     return render(
         request,
@@ -172,6 +180,11 @@ def article_search(request):
             results = Article.published.annotate(
                 similarity=TrigramSimilarity('headline', query),
             ).filter(similarity__gt=0.1).order_by('-similarity')
+
+            messages.success(
+                request,
+                'Выполнен поиск по опубликованным новостям.',
+            )
 
     return render(
         request,

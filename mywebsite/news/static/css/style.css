@@ -157,18 +157,18 @@ input[type=submit] {
     color: white;
 }
 
-.rss-link a {
+.footer-link a {
     background-color: #000000;
     border: none;
     padding: 0%;
     display: inline;
 }
 
-.rss-link a img {
+.footer-link a img {
     width: 30px;
     height: 30px;
 }
 
-.rss-link a:hover img {
+.footer-link a:hover img {
     transform: scale(1.1);
 }

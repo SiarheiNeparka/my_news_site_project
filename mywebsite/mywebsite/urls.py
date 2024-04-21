@@ -31,6 +31,6 @@ urlpatterns = [
         'sitemap.xml',
         sitemap,
         {'sitemaps': sitemaps},
-        name='django.sontrib.sitemaps.views.sitemap',
+        name='sitemap',
     ),
 ]

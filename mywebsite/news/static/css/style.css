@@ -186,3 +186,18 @@ input[type=submit] {
 .footer-link a:hover img {
     transform: scale(1.1);
 }
+
+.most-ranked-articles-links a:link,
+.most-ranked-articles-links a:visited {
+    background-color: #000000;
+    color: #49c5b6;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.most-ranked-articles-links a:hover,
+.most-ranked-articles-links a:active {
+    background-color: #49c5b6;
+    color: white;
+}

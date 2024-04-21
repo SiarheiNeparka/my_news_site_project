@@ -208,7 +208,7 @@ def article_search(request):
 
 
 def article_ranks(request):
-    article_ranks = r.zrange('article_ranks', 0, -1, desv=True)[:5]
+    article_ranks = r.zrange('article_ranks', 0, -1, desc=True)[:5]
 
     article_ranks_ids = [int(id) for id in article_ranks]
 

@@ -33,6 +33,8 @@ def article_list(request, tag_slug=None):
         articles = paginator.page(1)
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
+    else:
+        messages.success(request, 'Страница успешно загружена.')
 
     return render(
         request,
@@ -63,6 +65,8 @@ def article_detail(request, year, month, day, article_slg):
     similar_articles = similar_articles.annotate(
         same_tags=Count('tags'),
     ).order_by('-same_tags', '-publish')[:2]
+
+    messages.success(request, 'Страница успешно загружена.')
 
     return render(
         request,
@@ -144,6 +148,8 @@ def article_comment(request, year, month, day, article_slg):
         comment = form.save(commit=False)
         comment.article = article
         comment.save()
+
+        messages.success(request, 'Ваш комментарий успешно добавлен.')
     
     return render(
         request,

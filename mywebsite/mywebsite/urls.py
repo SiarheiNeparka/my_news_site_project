@@ -33,4 +33,5 @@ urlpatterns = [
         {'sitemaps': sitemaps},
         name='sitemap',
     ),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]

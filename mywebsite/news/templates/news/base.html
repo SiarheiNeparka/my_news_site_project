@@ -15,6 +15,17 @@
     <header>
         <h2>Новости</h2>
     </header>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">
+            {{ message|safe }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <section>
         <article>
             {% block content %}

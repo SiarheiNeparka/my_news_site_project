@@ -29,4 +29,5 @@ urlpatterns = [
     ),
     path('feed/', LatestArticlesFeed(), name='article_feed'),
     path('search/', views.article_search, name='article_search'),
+    path('ranks/', views.article_ranks, name='article_ranks'),
 ]

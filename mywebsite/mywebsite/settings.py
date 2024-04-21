@@ -101,6 +101,11 @@ PSQL_PASSWORD = conf['postgre']['PASSWORD']
 PSQL_HOST = conf['postgre']['HOST']
 PSQL_PORT = conf['postgre']['PORT']
 
+# Configuration information for redis.
+REDIS_HOST = conf['redis']['REDIS_HOST']
+REDIS_PORT = conf['redis']['REDIS_PORT']
+REDIS_DB = conf['redis']['REDIS_DB']
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

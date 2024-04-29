@@ -1,0 +1,7 @@
+<ul class="latest-articles-ul">
+    {% for article in latest_articles %}
+    <li>
+        <p class="latest-articles-links"><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a></p>
+    </li>
+    {% endfor %}
+</ul>

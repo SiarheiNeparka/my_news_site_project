@@ -1,0 +1,19 @@
+{% extends "news/base.html" %}
+
+{% block title %}Поделиться новостью{% endblock %}
+
+{% block content %}
+{% if sent %}
+<h1>Письмо успешно отправлено.</h1>
+<p>
+    Новость "{{ article.headline }}" была успешно отправлена по адресу {{ form.cleaned_data.to }}.
+</p>
+{% else %}
+<h1>Поделиться новостью "{{ article.headline }}" по электронной почте</h1>
+<form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Отправить письмо">
+</form>
+{% endif %}
+{% endblock %}

@@ -1,19 +1,33 @@
 {% extends "news/base.html" %}
+{% load news_tags %}
 
 {% block title %}Новости{% endblock%}
 
 {% block content %}
 <h1>Новости</h1>
+
+{% if tag %}
+<h2>Новости с тегом "{{ tag.name }}"</h2>
+{% endif %}
+
 {% for article in articles %}
 <h2>
     <a href="{{ article.get_absolute_url }}">
         {{ article.headline }}
     </a>
 </h2>
+
+{% for tag in article.tags.all %}
+<span class="tags-links">
+    <a href="{% url 'news:article_list_by_tag' tag.slug %}">{{ tag.name }}</a>
+</span>
+{% if not forloop.last %}/{% endif %}
+{% endfor %}
+
 <p class="pdate">
     Опубликовано {{ article.publish }} автором {{ article.reporter}}
 </p>
-{{ article.content|truncatewords:30|linebreaks }}
+{{ article.content|markdown|truncatewords:30 }}
 {% endfor%}
-{% include "pagination.html" with page=page_obj %}
+{% include "pagination.html" with page=articles %}
 {% endblock%}

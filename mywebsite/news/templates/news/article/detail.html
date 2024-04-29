@@ -1,11 +1,49 @@
 {% extends "news/base.html" %}
+{% load news_tags %}
 
 {% block title %} {{ article.headline }} {% endblock %}
 
 {% block content %}
 <h1>{{ article.headline }}</h1>
+
+<p class="total_views">
+    {{ total_views }} view{{ total_views|pluralize }}
+</p>
+
 <p class="pdate">
     Опубликовано {{ article.publish }} автором {{ article.reporter }}
 </p>
-{{ article.content }}
+{{ article.content|markdown }}
+
+<br><br>
+<a href="{{ article.get_absolute_url_share }}">Поделиться новостью.</a>
+
+{% with comments.count as total_comments %}
+<h2>
+    {{ total_comments }} comment{{ total_comments|pluralize }}
+</h2>
+{% endwith %}
+
+{% for comment in comments %}
+<div class="comment">
+    <p>
+        {{ forloop.counter }} комментарий, оставленный {{ comment.name }} {{ comment.created }}
+    </p>
+    {{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p>Ни одного комментария не было оставлено.</p>
+{% endfor %}
+
+{% include "news/article/includes/comment_form.html" %}
+
+<h2>Похожие новости</h2>
+{% for article in similar_articles %}
+<p>
+    <a href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+</p>
+{% empty %}
+Новости на похожую тематику отсутствуют.
+{% endfor %}
+
 {% endblock %}

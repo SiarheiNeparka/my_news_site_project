@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import configparser
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +31,8 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
+SITE_ID = 1
+
 
 # Application definition
 
@@ -40,6 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news.apps.NewsConfig',
+    'taggit',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'django.contrib.postgres',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'mywebsite.urls'
@@ -73,13 +83,41 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mywebsite.wsgi.application'
 
 
+# Connection with configs.cfg file.
+conf = configparser.ConfigParser()
+conf.read(f'{BASE_DIR}/configs.cfg')
+
+# Configuration information for email server.
+EMAIL_HOST = conf['gmail']['EMAIL_HOST']
+EMAIL_HOST_USER = conf['gmail']['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = conf['gmail']['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = conf['gmail']['EMAIL_PORT']
+EMAIL_USE_TLS = conf['gmail']['EMAIL_USE_TLS']
+
+# Configuration information for postgresql database.
+PSQL_NAME = conf['postgre']['NAME']
+PSQL_USER = conf['postgre']['USER']
+PSQL_PASSWORD = conf['postgre']['PASSWORD']
+PSQL_HOST = conf['postgre']['HOST']
+PSQL_PORT = conf['postgre']['PORT']
+
+# Configuration information for redis.
+REDIS_HOST = conf['redis']['REDIS_HOST']
+REDIS_PORT = conf['redis']['REDIS_PORT']
+REDIS_DB = conf['redis']['REDIS_DB']
+
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': PSQL_NAME,
+        'USER': PSQL_USER,
+        'PASSWORD': PSQL_PASSWORD,
+        'HOST': PSQL_HOST,
+        'PORT': PSQL_PORT,
     }
 }
 
@@ -124,3 +162,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Internal IPs configuration.
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

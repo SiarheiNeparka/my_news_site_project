@@ -1,0 +1,29 @@
+{% extends "news/base.html" %}
+{% load news_tags %}
+
+{% block title %}Поиск{% endblock %}
+{% block content %}
+{% if query %}
+<h1>Новости, содержащие "{{ query }}"</h1>
+<h3>
+    {% with results.count as total_results %}
+    Found {{ total_results }} result{{ total_results|pluralize }}
+    {% endwith %}
+</h3>
+{% for article in results %}
+<h4>
+    <a href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+</h4>
+{{ article.content|markdown|truncatewords_html:12 }}
+{% empty %}
+<p>По Вашему запросу ничего не найдено.</p>
+{% endfor %}
+<p><a href="{% url 'news:article_search' %}">Вернуться к поиску</a></p>
+{% else %}
+<h1>Найти новость</h1>
+<form method="get">
+    {{ form.as_p }}
+    <input type="submit" value="Поиск">
+</form>
+{% endif %}
+{% endblock %}

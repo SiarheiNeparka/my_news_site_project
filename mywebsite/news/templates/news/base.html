@@ -1,4 +1,5 @@
 {% load static %}
+{% load news_tags %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -14,24 +15,55 @@
     <header>
         <h2>Новости</h2>
     </header>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">
+            {{ message|safe }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <section>
         <article>
             {% block content %}
-            {% endblock%}
+            {% endblock %}
         </article>
 
         <nav>
             <ul>
                 <h2>Панель навигации</h2>
+                <hr>
+                <a href="{% url 'news:article_search' %}">Поиск по новостям</a>
                 <li>
-                    <p>Новостной портал</p>
+                    <p>Новостной портал содержит новостей: {% total_articles %}.</p>
                 </li>
-                <a href="{% url 'news:article_list' %}">Список новостей</a>
+                <a href="{% url 'news:article_list' %}">Список всех новостей</a>
+                <br>
+                <a href="{% url 'news:article_ranks' %}">Самые популярные новости</a>
+                <hr>
+                <h3>Самые свежие новости:</h3>
+                {% show_latest_articles 2 %}
+                <hr>
+                {% get_most_commented_articles 2 as most_commented_articles %}
+                <h3>Самые обсуждаемые новости:</h3>
+                {% for article in most_commented_articles %}
+                <li>
+                    <p class="most-commented-articles-links"><a href="{{ article.get_absolute_url }}">
+                            {{ article.headline }}</a></p>
+                </li>
+                {% endfor %}
             </ul>
         </nav>
     </section>
     <footer>
         <h2>© 2024 Новости</h2>
+        <span class="footer-link"><a href="{% url 'news:article_feed' %}"><img
+                    src="{% static 'news/img/rss.png' %}"></a></span>
+        <span class="footer-link"><a href="{% url 'sitemap' %}"><img
+                    src="{% static 'news/img/sitemap.png' %}"></a></span>
     </footer>
 </body>
 

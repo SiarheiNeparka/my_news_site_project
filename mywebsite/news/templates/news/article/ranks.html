@@ -1,0 +1,13 @@
+{% extends "news/base.html" %}
+
+{% block title %} Самые просматриваемые новости {% endblock %}
+{% block content %}
+<h1>Новости с самым большим количеством просмотров</h1>
+<ol>
+    {% for article in most_read_news %}
+    <li class="most-ranked-articles-links">
+        <a href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}

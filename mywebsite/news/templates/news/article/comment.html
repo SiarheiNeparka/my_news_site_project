@@ -1,0 +1,12 @@
+{% extends "news/base.html" %}
+
+{% block title %}Добавить комментарий{% endblock %}
+
+{% block content %}
+{% if comment %}
+<h2>Ваш комментарий был добавлен.</h2>
+<p><a href="{{ article.get_absolute_url }}">Вернуться к просмотру новости</a></p>
+{% else %}
+{% include "news/article/includes/comment_form.html" %}
+{% endif %}
+{% endblock %}

@@ -15,6 +15,20 @@ main {
     color: #49c5b6;
 }
 
+.messages {
+    margin: 0px;
+    padding: 16px;
+    background: #000000;
+    color: #49c5b6;
+    text-align: right;
+    list-style-position: inside;
+}
+
+.total_views {
+    color: #49c5b6;
+    text-align: right;
+}
+
 h1 {
     text-align: center;
     font-size: 30px;
@@ -85,7 +99,9 @@ footer {
 }
 
 .step-links a:link,
-.step-links a:visited {
+.step-links a:visited,
+.tags-links a:link,
+.tags-links a:visited {
     background-color: #000000;
     color: #49c5b6;
     border: none;
@@ -94,7 +110,94 @@ footer {
 }
 
 .step-links a:hover,
-.step-links a:active {
+.step-links a:active,
+.tags-links a:hover,
+.tags-links a:active {
+    background-color: #49c5b6;
+    color: white;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #49c5b6;
+    border-radius: 4px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #49c5b6;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+input[type=submit] {
+    background-color: #49c5b6;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.latest-articles-ul {
+    list-style-type: disc;
+    padding: 0px;
+}
+
+.latest-articles-links a:link,
+.latest-articles-links a:visited,
+.most-commented-articles-links a:link,
+.most-commented-articles-links a:visited {
+    background-color: #2779a7;
+    color: #49c5b6;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.latest-articles-links a:hover,
+.latest-articles-links a:active,
+.most-commented-articles-links a:hover,
+.most-commented-articles-links a:active {
+    background-color: #49c5b6;
+    color: white;
+}
+
+.footer-link a {
+    background-color: #000000;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.footer-link a img {
+    width: 30px;
+    height: 30px;
+}
+
+.footer-link a:hover img {
+    transform: scale(1.1);
+}
+
+.most-ranked-articles-links a:link,
+.most-ranked-articles-links a:visited {
+    background-color: #000000;
+    color: #49c5b6;
+    border: none;
+    padding: 0%;
+    display: inline;
+}
+
+.most-ranked-articles-links a:hover,
+.most-ranked-articles-links a:active {
     background-color: #49c5b6;
     color: white;
 }
